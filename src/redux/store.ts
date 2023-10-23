@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
+import discussReducer from "./slices/discussSlice";
 import {
   useDispatch as useDispatchBase,
   useSelector as useSelectorBase,
@@ -8,6 +9,7 @@ import {
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    discuss: discussReducer,
   }
 });
 

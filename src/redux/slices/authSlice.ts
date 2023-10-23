@@ -30,7 +30,6 @@ export const authSlice = createSlice({
       state.user = undefined;
       state.fetchSuccess = true;
     },
-    
     changeFetchSuccessToFalse: (state) => {
       state.fetchSuccess = false;
     },
