@@ -1,5 +1,5 @@
 import React from 'react'
-import IconNext from '../components/IconNext';
+import IconNext from '../../components/IconNext';
 
 function MostLikedDiscuss() {
   return (

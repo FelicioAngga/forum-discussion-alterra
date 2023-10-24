@@ -21,6 +21,7 @@ export default async function() {
     }
 
     discussionArray.push({
+      docId: doc.id,
       email: tempData["email"],
       user_image: tempData["user_image"],
       username: tempData["username"],
@@ -28,6 +29,7 @@ export default async function() {
       title: tempData["title"],
       hashtag: tempData["hashtag"],
       image: imageUrl,
+      created_at: tempData["created_at"].toDate().toString(),
     });
   }
   return discussionArray;
