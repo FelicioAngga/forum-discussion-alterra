@@ -24,12 +24,12 @@ function Header() {
 
   useEffect(() => {
     if (fetchSuccess) setIsLoading(false);
-  }, [dispatch, user?.user_uid, fetchSuccess]);
+  }, [dispatch, user?.user_id, fetchSuccess]);
 
   return (
     <div className="px-6 py-5 flex justify-between bg-[#262D34]">
-      <Link className="my-auto" href="/">
-        <div className="flex flex-1 gap-3">
+      <Link className="my-auto flex-1" href="/">
+        <div className="flex gap-3">
           <img className="w-[30px] h-[30px] my-auto" src="/Logo.png" alt="" />
           <p className="hidden md:block font-bold text-[26px] text-[#FF571A] my-auto">Forum Discussion</p>
         </div>

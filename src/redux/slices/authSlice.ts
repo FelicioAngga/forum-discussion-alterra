@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export type User = {
-  user_uid: string;
+  user_id: string;
   email: string | null;
   username: string | null;
   photoURL: string | null;

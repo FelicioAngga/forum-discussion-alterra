@@ -1,10 +1,12 @@
 import getAllDiscussionService from "@/app/dashboard/services/getAllDiscussionService";
 import getDiscussionById from "@/app/discussion/services/getDiscussionById";
+import getReplyDiscussService, { ReceivedReplyDiscussType } from "@/app/discussion/services/getReplyDiscussService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export type DiscussTypeRedux = {
   docId: string;
-  user_uid: string;
+  comments_count: number;
+  user_id: string;
   email: string;
   username: string;
   user_image: string;
@@ -17,12 +19,14 @@ export type DiscussTypeRedux = {
 export interface DiscussType {
   discussionList: Array<DiscussTypeRedux>;
   discussionDetail: DiscussTypeRedux | null;
+  replyDiscussionList: Array<ReceivedReplyDiscussType> | null;
   loading: boolean;
 }
 
 const initialState: DiscussType = {
   discussionList: [],
   discussionDetail: null,
+  replyDiscussionList: null,
   loading: false,
 }
 
@@ -32,8 +36,9 @@ export const fetchDiscussionsThunk = createAsyncThunk('discussions/fetchDiscussi
 });
 
 export const fetchDiscussionByIdThunk = createAsyncThunk('discussions/fetchDiscussionById', async (id: string) => {
-  const result = await getDiscussionById(id);
-  return result;
+  const discussionDetail = await getDiscussionById(id);
+  const replyDiscussionResult = await getReplyDiscussService(id);
+  return { discussionDetail, replyDiscussionResult };
 });
 
 export const discussSlice = createSlice({
@@ -56,7 +61,8 @@ export const discussSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchDiscussionByIdThunk.fulfilled, (state, action) => {
-      state.discussionDetail = action.payload;
+      state.discussionDetail = action.payload.discussionDetail;
+      state.replyDiscussionList = action.payload.replyDiscussionResult;
       state.loading = false;
     });
     builder.addCase(fetchDiscussionByIdThunk.rejected, (state) => {

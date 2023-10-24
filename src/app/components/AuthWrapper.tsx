@@ -15,7 +15,7 @@ export default function ({ children, header = <Header /> }: { children: JSX.Elem
         dispatch(loggedInUserFailed());
         return;
       }
-      dispatch(loggedInUserSuccess({ user_uid: user.uid, email: user.email, photoURL: user.photoURL, username: user.displayName }));
+      dispatch(loggedInUserSuccess({ user_id: user.uid, email: user.email, photoURL: user.photoURL, username: user.displayName }));
     });
   }, [])
 

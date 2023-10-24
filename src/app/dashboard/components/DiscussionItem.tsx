@@ -32,7 +32,9 @@ function DiscussionItem(data: DiscussTypeRedux) {
                 <p className="text-[10px] text-[#C5D0E6]">{getSinceCreated()} ago</p>
               </div>
             </div>
-
+            <div className="h-fit my-auto">
+              <p className="text-sm text-[#C5D0E6]">{data.comments_count || 0} comments</p>
+            </div>
           </div>
         </div>
       </div>

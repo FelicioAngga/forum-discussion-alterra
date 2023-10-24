@@ -22,10 +22,11 @@ export default async function() {
 
     discussionArray.push({
       docId: doc.id,
+      comments_count: tempData["comments_count"],
       email: tempData["email"],
       user_image: tempData["user_image"],
       username: tempData["username"],
-      user_uid: tempData["user_uid"],
+      user_id: tempData["user_id"],
       title: tempData["title"],
       hashtag: tempData["hashtag"],
       image: imageUrl,
