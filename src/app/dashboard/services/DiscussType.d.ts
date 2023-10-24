@@ -1,5 +1,5 @@
 export type DiscussionType = {
-  user_uid: string;
+  user_id: string;
   email: string | null;
   username: string | null;
   title: string;

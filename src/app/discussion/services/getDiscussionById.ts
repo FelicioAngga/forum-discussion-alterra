@@ -4,7 +4,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 
 export default async function(docId: string) {
   const discussionDoc = await getDoc(doc(FirebaseConfiguration.db, `discussions/${docId}`));
-  const { email, user_image, username, user_uid, title, hashtag, image, created_at }: any = discussionDoc.data();
+  const { email, user_image, comments_count, username, user_id, title, hashtag, image, created_at }: any = discussionDoc.data();
   let imageUrl = "";
 
   const imagesRef = ref(FirebaseConfiguration.storage, image);
@@ -16,10 +16,11 @@ export default async function(docId: string) {
   
   return {
     docId: discussionDoc.id,
+    comments_count,
     email,
     user_image,
     username,
-    user_uid,
+    user_id,
     title,
     hashtag,
     image: imageUrl,

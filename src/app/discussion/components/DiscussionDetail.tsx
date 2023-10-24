@@ -3,13 +3,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from '@/redux/store';
 import { fetchDiscussionByIdThunk } from '@/redux/slices/discussSlice';
 import { AiFillHeart } from 'react-icons/ai';
-import AuthWrapper from '@/app/components/AuthWrapper';
 import { timeSince } from '@/app/utils/timeSince';
 import Skeleton from 'react-loading-skeleton';
 
 function DiscussionDetail({ id }: { id: string }) {
   const dispatch = useDispatch();
-  const { discussionDetail, loading } = useSelector((states) => states.discuss);
+  const { discussionDetail, replyDiscussionList, loading } = useSelector((states) => states.discuss);
   
   function getSinceCreated() {
     if (!discussionDetail?.created_at) return;
@@ -20,8 +19,11 @@ function DiscussionDetail({ id }: { id: string }) {
     dispatch(fetchDiscussionByIdThunk(id));
   }, [id, dispatch]);
 
-
-  if(loading || !discussionDetail) return <Skeleton duration={0.6} height={196} className='!block !mx-auto !w-[720px] !rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
+  if(loading || !discussionDetail) return <div>
+    <Skeleton duration={0.6} height={196} className='!block !mx-auto !w-[720px] !rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
+    <Skeleton duration={0.6} height={116} className='!block !mx-auto !w-[720px] !rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
+    <Skeleton duration={0.6} height={116} className='!block !mx-auto !w-[720px] !rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
+  </div>
   return (
     <div className="mx-auto cursor-pointer p-5 w-full rounded-2xl bg-[#262D34] max-w-[720px]">
       <div className="flex flex-col md:flex-row gap-3 xl:gap-4 2xl:gap-5">
@@ -41,10 +43,13 @@ function DiscussionDetail({ id }: { id: string }) {
                 <p className="text-[10px] text-[#C5D0E6]">{getSinceCreated()} ago</p>
               </div>
             </div>
+            <div className="h-fit my-auto">
+              <p className="text-sm text-[#C5D0E6]">{replyDiscussionList?.length || 0} comments</p>
+            </div>
           </div>
         </div>
       </div>
-      <AiFillHeart className="mt-3 shrink-0 text-xl my-auto" />
+      <AiFillHeart className="mt-4 shrink-0 text-xl my-auto" />
     </div>
   )
 }
