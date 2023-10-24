@@ -2,9 +2,10 @@ import FirebaseConfiguration from '@/firebase/FirebaseConfiguration'
 import { loggedInUserFailed, loggedInUserSuccess } from '@/redux/slices/authSlice';
 import { useDispatch } from '@/redux/store';
 import React, { useEffect } from 'react'
+import Header from './Header';
 
 
-export default function ({ children }: { children: JSX.Element }) {
+export default function ({ children, header = <Header /> }: { children: JSX.Element, header?: JSX.Element }) {
   const dispatch = useDispatch();
   const auth = FirebaseConfiguration.auth;
 
@@ -20,6 +21,7 @@ export default function ({ children }: { children: JSX.Element }) {
 
   return (
     <>
+      {header}
       {children}
     </>
   )

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from '@/redux/store';
 import React, { useEffect, useRef, useState } from 'react'
 import { IoMdDocument } from 'react-icons/io'
-import createDiscussService from './services/createDiscussService';
+import createDiscussService from '../services/createDiscussService';
 import { fetchDiscussionsThunk } from '@/redux/slices/discussSlice';
 import { changeFetchSuccessToFalse } from '@/redux/slices/authSlice';
 import Skeleton from 'react-loading-skeleton';
@@ -45,6 +45,7 @@ function CreateDiscussion() {
   useEffect(() => {
     if (fetchSuccess) setIsAuthLoading(false);
     dispatch(changeFetchSuccessToFalse());
+    return () => setIsAuthLoading(true);
   }, [dispatch, user?.user_uid, fetchSuccess]);
   
   if (isAuthLoading) return <Skeleton duration={0.6} width={620} height={88} className='!rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
