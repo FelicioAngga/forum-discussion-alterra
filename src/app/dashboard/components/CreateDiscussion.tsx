@@ -48,7 +48,7 @@ function CreateDiscussion() {
   }, [dispatch, user?.user_id, fetchSuccess]);
   
   if (isAuthLoading) return <Skeleton duration={0.6} width={620} height={88} className='!rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
-  if (!user) return <p>You need to login before create a post</p>
+  if (!user) return <p>You need to login before like or create a post</p>
   return (
     <div className={`rounded-2xl bg-[#262D34] p-5 focus-within:h-[212px] ${(!inputs.image && !inputs.title && !inputs.hashtag) && 'h-[88px]'} overflow-hidden transition-all`}>
       <div className="flex gap-5">
