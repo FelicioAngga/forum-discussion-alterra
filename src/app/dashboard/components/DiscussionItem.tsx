@@ -9,18 +9,24 @@ import { useSelector } from '@/redux/store';
 function DiscussionItem(data: DiscussTypeRedux) {
   const { user } = useSelector((states) => states.auth);
   const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+
   function getSinceCreated() {
     return timeSince(new Date(data.created_at).getTime() / 1000);
   }
 
   function handleLikeClick(like: boolean) {
+    if (!user) return;
     setIsLiked(like);
+    setLikeCount(prev => like ? prev + 1 : prev - 1);
     likeDiscussService(data.docId, like);
   }
 
   useEffect(() => {
+    if (!user) return;
     const liked = data.likes ? data.likes.filter(item => item === user?.user_id).length > 0 : false;
     setIsLiked(liked);
+    setLikeCount(data.likes?.length || 0);
   }, [data.likes]);
 
   return (
@@ -50,7 +56,8 @@ function DiscussionItem(data: DiscussTypeRedux) {
                 <p className="text-[10px] text-[#C5D0E6]">{getSinceCreated()} ago</p>
               </div>
             </div>
-            <div className="h-fit my-auto">
+            <div className="flex gap-3 h-fit my-auto">
+              <p className="text-sm text-[#C5D0E6]">{likeCount} likes</p>
               <p className="text-sm text-[#C5D0E6]">{data.comments_count || 0} comments</p>
             </div>
           </div>
