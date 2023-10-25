@@ -3,15 +3,18 @@ import { changeFetchSuccessToFalse } from '@/redux/slices/authSlice';
 import { useDispatch, useSelector } from '@/redux/store';
 import { signInWithPopup } from 'firebase/auth';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
-import { AiOutlineSearch } from 'react-icons/ai';
+import React, { useEffect, useRef, useState } from 'react'
+import { AiOutlineCaretDown, AiOutlineSearch } from 'react-icons/ai';
 import { BsChat } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import Skeleton from 'react-loading-skeleton';
+import Dropdown from './Dropdown';
 
 function Header() {
   const { user, fetchSuccess } = useSelector((states) => states.auth);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
   function handleGoogleAuth() {
@@ -47,9 +50,13 @@ function Header() {
       : user ?
         <div className="flex md:flex-1 gap-6">
           <div className="hidden md:block ml-auto rounded-lg w-10 h-10 p-[10px] bg-[#2C353D]"><BsChat className="text-xl text-white" /></div>
-          <div className="flex gap-4 ml-auto md:ml-0">
-            <img className="w-7 h-7 md:w-10 md:h-10 rounded-xl object-cover block m-auto" src={user.photoURL || ""} alt="" />
-            <p className="text-sm md:text-base font-bold my-auto">{user.username}</p>
+          <div className="relative">
+            <div ref={wrapperRef} onClick={() => setShowDropdown(prev => !prev)} className="flex ml-auto md:ml-0 cursor-pointer">
+              <img className="w-7 h-7 md:w-10 md:h-10 rounded-xl object-cover block m-auto" src={user.photoURL || ""} alt="" />
+              <p className="ml-3 text-sm md:text-base font-bold my-auto">{user.username}</p>
+              <AiOutlineCaretDown className="ml-2 my-auto" />
+            </div>
+            {showDropdown && <Dropdown wrapperRef={wrapperRef} onClose={() => setShowDropdown(false)} />}
           </div>
         </div> :
         <div className="md:flex-1">

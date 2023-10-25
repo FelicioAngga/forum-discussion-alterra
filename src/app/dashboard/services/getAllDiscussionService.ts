@@ -30,6 +30,7 @@ export default async function() {
       title: tempData["title"],
       hashtag: tempData["hashtag"],
       image: imageUrl,
+      likes: tempData["likes"],
       created_at: tempData["created_at"].toDate().toString(),
     });
   }

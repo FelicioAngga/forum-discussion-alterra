@@ -13,6 +13,7 @@ export type DiscussTypeRedux = {
   title: string;
   hashtag: Array<string>;
   image: string;
+  likes?: Array<string>;
   created_at: string;
 }
 

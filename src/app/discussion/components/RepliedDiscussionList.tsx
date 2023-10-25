@@ -7,7 +7,7 @@ function RepliedDiscussionList() {
   
   if (!replyDiscussionList || loading) return <></>;
   return (
-    <div className="mt-4 flex flex-col gap-4 max-h-[340px] overflow-auto max-w-[720px] mx-auto">
+    <div className="mt-4 flex flex-col gap-4 max-reply-height overflow-auto max-w-[720px] mx-auto">
       {replyDiscussionList.map((data, index) => <RepliedDiscussionItem data={data} key={index} />)}
     </div>
   )
