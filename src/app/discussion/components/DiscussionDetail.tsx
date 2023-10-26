@@ -31,11 +31,15 @@ function DiscussionDetail({ id }: { id: string }) {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (!discussionDetail || !user) return;
+    if (!discussionDetail) return;
+    setLikeCount(discussionDetail.likes?.length || 0);
+    if (!user) {
+      setIsLiked(false);
+      return;
+    }
     const liked = discussionDetail.likes ? discussionDetail.likes.filter(item => item === user?.user_id).length > 0 : false;
     setIsLiked(liked);
-    setLikeCount(discussionDetail.likes?.length || 0);
-  }, [discussionDetail?.likes]);
+  }, [discussionDetail?.likes, user]);
   
   if(loading || !discussionDetail) return <div>
     <Skeleton duration={0.6} height={196} className='!block !mx-auto !w-[720px] !rounded-2xl' highlightColor="#2C353D" baseColor="#262D34" />
@@ -56,7 +60,7 @@ function DiscussionDetail({ id }: { id: string }) {
 
           <div className="mt-7 flex justify-between">
             <div className="flex gap-[10px]">
-              <img className="w-10 h-10 rounded-full" src={discussionDetail.user_image} alt="" />
+              <img className="w-10 h-10 rounded-full" src={discussionDetail.user_image} alt="" referrerPolicy="no-referrer" />
               <div>
                 <p className="text-sm font-semibold">{discussionDetail.username}</p>
                 <p className="text-[10px] text-[#C5D0E6]">{getSinceCreated()} ago</p>

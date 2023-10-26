@@ -12,7 +12,7 @@ function RepliedDiscussionItem({ data }: { data: ReceivedReplyDiscussType }) {
       <p className="font-medium text-lg">{data.reply_text}</p>
       <div className="flex">
         <div className="flex gap-2 mt-4">
-          <img className="w-10 h-10 rounded-full object-cover block my-auto" src={data.user_image || ""} alt="" />
+          <img className="w-10 h-10 rounded-full object-cover block my-auto" src={data.user_image || ""} alt="" referrerPolicy="no-referrer" />
           <div>
             <p className="font-semibold text-sm my-auto">{data.username}</p>
             <p className="text-[10px] text-[#C5D0E6]">{getSinceCreated()} ago</p>
