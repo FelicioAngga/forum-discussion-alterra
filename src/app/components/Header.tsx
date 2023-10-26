@@ -56,9 +56,9 @@ function Header() {
       {isLoading ? 
       <div className="md:flex-1 h-[50px]"><Skeleton duration={0.6} width={232} height={50} className='!rounded-lg !ml-auto !block' highlightColor="#858EAD" baseColor="#2C353D" /></div> 
       : user ?
-        <div className="flex md:flex-1 gap-6 my-auto">
-          <div className="hidden md:block ml-auto rounded-lg w-10 h-10 p-[10px] bg-[#2C353D]"><BsChat className="text-xl text-white" /></div>
-          <div className="relative">
+        <div className="flex md:flex-1 gap-2 md:gap-6 my-auto">
+          <Link href="/chat" className="ml-auto"><div className="md:w-10 md:h-10 rounded-lg p-[10px] bg-[#2C353D]"><BsChat className="md:text-xl text-white" /></div></Link>
+          <div className="relative my-auto">
             <div ref={wrapperRef} onClick={() => setShowDropdown(prev => !prev)} className="flex ml-auto md:ml-0 cursor-pointer">
               <img className="w-7 h-7 md:w-10 md:h-10 rounded-xl object-cover block m-auto" src={user.photoURL || ""} alt="" referrerPolicy="no-referrer" />
               <p className="ml-3 text-sm md:text-base font-bold my-auto">{user.username}</p>
