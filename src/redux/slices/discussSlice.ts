@@ -31,8 +31,11 @@ const initialState: DiscussType = {
   loading: false,
 }
 
-export const fetchDiscussionsThunk = createAsyncThunk('discussions/fetchDiscussions', async () => {
-  const result = await getAllDiscussionService();
+export const fetchDiscussionsThunk = createAsyncThunk('discussions/fetchDiscussions', async (search: string | undefined) => {
+  let result = await getAllDiscussionService();
+  if (search) {
+    result = result.filter(item => item.title.includes(search));
+  }
   return result;
 });
 

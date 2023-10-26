@@ -43,7 +43,7 @@ function ReplyDiscussion({ id }: { id: string }) {
         <button type='submit' disabled={!text} className="my-auto px-5 py-3 rounded-md text-sm font-medium bg-[#FF6934] disabled:bg-gray-400">Submit</button>
       </form>
       <div className="flex gap-4 mt-4">
-        <img className="w-10 h-10 rounded-full object-cover block my-auto" src={user.photoURL || ""} alt="" />
+        <img className="w-10 h-10 rounded-full object-cover block my-auto" src={user.photoURL || ""} alt="" referrerPolicy="no-referrer" />
         <p className="font-semibold text-sm my-auto">{user.username}</p>
       </div>
     </div>
