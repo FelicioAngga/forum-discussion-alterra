@@ -25,3 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.max-reply-height {
+  max-height: 340px;
+}
+
+@media (min-height: 860px) {
+  .max-reply-height {
+    max-height: 440px;
+  }
+}
