@@ -18,16 +18,16 @@ function ChatContainer() {
     setChatData(prev => [...prev, { type: "outgoing", text: input }])
     setInput("");
     
-    openai.completions.create({
-      prompt: input,
-      model: "gpt-3.5-turbo-instruct",
-      temperature: 0.5,
-      max_tokens: 256,
-    }).then((data) => {
-      console.log(data)
-      setChatData(prev => [...prev, { type: "incoming", text: data.choices[0].text }])
-      setIsLoading(false);
-    })
+    // openai.completions.create({
+    //   prompt: input,
+    //   model: "gpt-3.5-turbo-instruct",
+    //   temperature: 0.5,
+    //   max_tokens: 256,
+    // }).then((data) => {
+    //   console.log(data)
+    //   setChatData(prev => [...prev, { type: "incoming", text: data.choices[0].text }])
+    //   setIsLoading(false);
+    // })
   }
 
   return (
